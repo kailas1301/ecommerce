@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "127018438667",
+    "project_id": "mallu-trendy-store",
+    "storage_bucket": "mallu-trendy-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127018438667:android:d7f4873b79b0b3330eb70e",
+        "android_client_info": {
+          "package_name": "com.example.mallu_trendy_store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd4Npznh_wbR_SM7XthdaZwpLLTKPKEPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
