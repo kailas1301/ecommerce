@@ -8,7 +8,6 @@ import 'package:mallu_trendy_store/views/add_orders/model/order_model.dart';
 import 'package:mallu_trendy_store/views/add_orders/view_model/order_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
-
 import '../../utils/font_pallette.dart';
 
 class OrderScreen extends StatefulWidget {
@@ -31,94 +30,100 @@ class _OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
     final orderProvider = context.read<OrderProvider>();
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: ColorPallette.scaffoldBgColor,
-        body: Selector<OrderProvider,
-            Tuple4<bool, List<OrderModel>, List<OrderModel>, List<DateTime?>>>(
-          selector: (p0, p1) => Tuple4(p1.isLoading, p1.allOrderList,
-              p1.filteredList, p1.selectedDateRange),
-          builder: (context, value, child) {
-            final orderList = value.item2;
-            final isLoading = value.item1;
-            final selectedDates = value.item4;
-            return isLoading
-                ? const LoadingAnimation()
-                : CustomScrollView(
-                    slivers: [
-                      SliverToBoxAdapter(child: 20.verticalSpace),
-                      SliverToBoxAdapter(
-                        child: TotalOrderDetails(orderList: orderList),
-                      ),
-                      SliverToBoxAdapter(child: 20.verticalSpace),
-                      SliverToBoxAdapter(
-                        child: Padding(
-                          padding: EdgeInsets.all(10.r),
-                          child: CalendarDatePicker2WithActionButtons(
-                            config: CalendarDatePicker2WithActionButtonsConfig(
-                              weekdayLabelTextStyle:
-                                  FontPallette.headingStyle.copyWith(
-                                fontSize: 14.sp,
-                                color: ColorPallette.darkGreyColor,
-                              ),
-                              daySplashColor: Colors.transparent,
-                              animateToDisplayedMonthDate: true,
-                              firstDayOfWeek: 1,
-                              calendarType: CalendarDatePicker2Type.range,
-                              lastDate: DateTime.now(),
-                              monthTextStyle:
-                                  FontPallette.headingStyle.copyWith(
-                                fontSize: 14.sp,
-                              ),
-                              selectedYearTextStyle:
-                                  FontPallette.headingStyle.copyWith(
-                                fontSize: 14.sp,
-                                color: ColorPallette.whiteColor,
-                              ),
-                              selectedMonthTextStyle:
-                                  FontPallette.headingStyle.copyWith(
-                                fontSize: 14.sp,
-                                color: ColorPallette.whiteColor,
-                              ),
-                              yearTextStyle: FontPallette.headingStyle
-                                  .copyWith(fontSize: 14.sp),
-                              currentDate: DateTime.now(),
-                              selectedDayTextStyle: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700,
-                              ),
-                              selectedDayHighlightColor: Colors.black,
-                              centerAlignModePicker: true,
-                              customModePickerIcon: const SizedBox(),
-                              dayTextStyle: FontPallette.headingStyle
-                                  .copyWith(fontSize: 12.sp),
+        centerTitle: true,
+        title: Text(
+          "Orders",
+          style: FontPallette.headingStyle,
+        ),
+      ),
+      backgroundColor: ColorPallette.scaffoldBgColor,
+      body: Selector<OrderProvider,
+          Tuple4<bool, List<OrderModel>, List<OrderModel>, List<DateTime?>>>(
+        selector: (p0, p1) => Tuple4(p1.isLoading, p1.allOrderList,
+            p1.filteredList, p1.selectedDateRange),
+        builder: (context, value, child) {
+          final orderList = value.item2;
+          final isLoading = value.item1;
+          final selectedDates = value.item4;
+          return isLoading
+              ? const LoadingAnimation()
+              : CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(child: 30.verticalSpace),
+                    SliverToBoxAdapter(
+                      child: TotalOrderDetails(orderList: orderList),
+                    ),
+                    SliverToBoxAdapter(child: 20.verticalSpace),
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.all(10.r),
+                        child: CalendarDatePicker2WithActionButtons(
+                          config: CalendarDatePicker2WithActionButtonsConfig(
+                            weekdayLabelTextStyle:
+                                FontPallette.headingStyle.copyWith(
+                              fontSize: 14.sp,
+                              color: ColorPallette.darkGreyColor,
                             ),
-                            value: selectedDates,
-                            onValueChanged: (dates) {
-                              if (dates.isNotEmpty) {
-                                print("${dates.first}");
-                                print("${dates.last}");
-
-                                orderProvider.updateDateRange(
-                                    dates.first!, dates.last!);
-                              }
-                            },
+                            daySplashColor: Colors.transparent,
+                            animateToDisplayedMonthDate: true,
+                            firstDayOfWeek: 1,
+                            calendarType: CalendarDatePicker2Type.range,
+                            lastDate: DateTime.now(),
+                            monthTextStyle: FontPallette.headingStyle.copyWith(
+                              fontSize: 14.sp,
+                            ),
+                            selectedYearTextStyle:
+                                FontPallette.headingStyle.copyWith(
+                              fontSize: 14.sp,
+                              color: ColorPallette.whiteColor,
+                            ),
+                            selectedMonthTextStyle:
+                                FontPallette.headingStyle.copyWith(
+                              fontSize: 14.sp,
+                              color: ColorPallette.whiteColor,
+                            ),
+                            yearTextStyle: FontPallette.headingStyle
+                                .copyWith(fontSize: 14.sp),
+                            currentDate: DateTime.now(),
+                            selectedDayTextStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            selectedDayHighlightColor: Colors.black,
+                            centerAlignModePicker: true,
+                            customModePickerIcon: const SizedBox(),
+                            dayTextStyle: FontPallette.headingStyle
+                                .copyWith(fontSize: 12.sp),
                           ),
+                          value: selectedDates,
+                          onValueChanged: (dates) {
+                            if (dates.isNotEmpty) {
+                              print("${dates.first}");
+                              print("${dates.last}");
+
+                              orderProvider.updateDateRange(
+                                  dates.first!, dates.last!);
+                            }
+                          },
                         ),
                       ),
-                      SliverToBoxAdapter(child: 20.verticalSpace),
-                      SliverList.builder(
-                        itemCount: orderList.length,
-                        itemBuilder: (context, index) {
-                          final order = orderList[index];
-                          return OrderDetailTile(
-                              order: order, orderProvider: orderProvider);
-                        },
-                      )
-                    ],
-                  );
-          },
-        ),
+                    ),
+                    SliverToBoxAdapter(child: 20.verticalSpace),
+                    SliverList.builder(
+                      itemCount: orderList.length,
+                      itemBuilder: (context, index) {
+                        final order = orderList[index];
+                        return OrderDetailTile(
+                            order: order, orderProvider: orderProvider);
+                      },
+                    )
+                  ],
+                );
+        },
       ),
     );
   }

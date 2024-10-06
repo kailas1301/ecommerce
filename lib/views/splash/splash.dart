@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mallu_trendy_store/utils/color_pallette.dart';
 import 'package:mallu_trendy_store/utils/font_pallette.dart';
-
 import '../../route/route_generator.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -34,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: double.infinity,
               child: Center(
                 child: Text(
-                  "splash",
+                  "Mallu Trendy Stores",
                   style: FontPallette.headingStyle,
                 ),
               ))),

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mallu_trendy_store/common_widgets/neumorphic.dart';
 import 'package:mallu_trendy_store/common_widgets/textform_field.dart';
-
+import 'package:mallu_trendy_store/utils/color_pallette.dart';
 import '../../utils/font_pallette.dart';
 
 void showAlertDialog(
@@ -31,34 +30,40 @@ void showAlertDialog(
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GestureDetector(
+              InkWell(
                   onTap: () {
                     if (controller.text.isNotEmpty) {
                       onAddCategory();
                     }
                   },
-                  child: NeumorphicContainer(
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: ColorPallette.blackColor,
+                          borderRadius: BorderRadius.circular(15)),
                       height: 40.h,
-                      width: 100.w,
-                      childWidget: Center(
+                      width: 110.w,
+                      child: Center(
                           child: Text(
                         'Save',
-                        style:
-                            FontPallette.headingStyle.copyWith(fontSize: 13.sp),
+                        style: FontPallette.headingStyle.copyWith(
+                            fontSize: 13.sp, color: ColorPallette.whiteColor),
                       )))),
               20.horizontalSpace,
-              GestureDetector(
+              InkWell(
                 onTap: () {
                   Navigator.of(context).pop();
                 },
-                child: NeumorphicContainer(
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: ColorPallette.blackColor,
+                        borderRadius: BorderRadius.circular(15)),
                     height: 40.h,
-                    width: 100.w,
-                    childWidget: Center(
+                    width: 110.w,
+                    child: Center(
                         child: Text(
                       'Cancel',
-                      style:
-                          FontPallette.headingStyle.copyWith(fontSize: 13.sp),
+                      style: FontPallette.headingStyle.copyWith(
+                          fontSize: 13.sp, color: ColorPallette.whiteColor),
                     ))),
               ),
             ],
